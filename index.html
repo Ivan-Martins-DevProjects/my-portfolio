@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ivan Martins | Desenvolvedor Fullstack & Especialista em IA</title>
+  <!-- Ícones Phosphor -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a192f;
+      --bg-light: #112240;
+      --primary: #64ffda;
+      /* Cyan Neon */
+      --text-main: #ccd6f6;
+      --text-muted: #8892b0;
+      --font-main: 'Inter', sans-serif;
+      --font-code: 'Fira Code', monospace;
+      --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* --- Utilitários --- */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.75rem;
+      margin-bottom: 40px;
+      font-weight: 600;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 200px;
+      height: 1px;
+      background: var(--bg-light);
+      margin-left: 20px;
+    }
+
+    .section-title span {
+      color: var(--primary);
+      font-family: var(--font-code);
+      font-size: 1.25rem;
+      margin-right: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border: 1px solid var(--primary);
+      border-radius: 4px;
+      color: var(--primary);
+      font-family: var(--font-code);
+      font-size: 0.9rem;
+      transition: var(--transition);
+      background: transparent;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background: rgba(100, 255, 218, 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* --- Header --- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 80px;
+      background: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .logo {
+      font-family: var(--font-code);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 80px;
+    }
+
+    .hero-intro {
+      font-family: var(--font-code);
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 8vw, 70px);
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.1;
+    }
+
+    .hero h2 {
+      font-size: clamp(30px, 6vw, 60px);
+      font-weight: 700;
+      color: var(--text-muted);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 540px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 50px;
+    }
+
+    /* --- About Section --- */
+    .about {
+      padding: 100px 0;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+      color: var(--text-muted);
+    }
+
+    .tech-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(140px, 200px));
+      gap: 10px;
+      margin-top: 20px;
+      font-family: var(--font-code);
+      font-size: 0.85rem;
+    }
+
+    .tech-list li::before {
+      content: "▹";
+      color: var(--primary);
+      margin-right: 10px;
+    }
+
+    .about-img {
+      position: relative;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .about-img:hover {
+      transform: translate(-5px, -5px);
+    }
+
+    .about-img-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 4px;
+      background-color: var(--primary);
+    }
+
+    .about-img-wrapper::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--primary);
+      top: 20px;
+      left: 20px;
+      border-radius: 4px;
+      z-index: -1;
+      transition: var(--transition);
+    }
+
+    .about-img-wrapper:hover::after {
+      top: 10px;
+      left: 10px;
+    }
+
+    .about-img img {
+      width: 100%;
+      border-radius: 4px;
+      filter: grayscale(100%) contrast(1);
+      transition: var(--transition);
+      display: block;
+    }
+
+    .about-img:hover img {
+      filter: none;
+    }
+
+    /* --- NEW: AI Chatbots Section --- */
+    .ai-services {
+      padding: 50px 0 100px 0;
+    }
+
+    .ai-intro {
+      max-width: 700px;
+      margin-bottom: 40px;
+      color: var(--text-muted);
+    }
+
+    .chatbots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .chatbot-card {
+      background-color: var(--bg-light);
+      padding: 30px;
+      border-radius: 4px;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .chatbot-card:hover {
+      transform: translateY(-7px);
+      background-color: rgba(17, 34, 64, 0.8);
+    }
+
+    .chatbot-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .chatbot-card h3 {
+      color: var(--text-main);
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .chatbot-card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .chatbot-card ul {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chatbot-card li {
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      color: var(--primary);
+      background: rgba(100, 255, 218, 0.05);
+      padding: 5px 10px;
+      border-radius: 12px;
+    }
+
+    /* --- Skills Section (Cloud) --- */
+    .skills-section {
+      padding: 50px 0;
+      text-align: center;
+    }
+
+    .skills-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .skill-tag {
+      background: var(--bg-light);
+      color: var(--primary);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-family: var(--font-code);
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .skill-tag:hover {
+      transform: scale(1.1);
+      background: rgba(100, 255, 218, 0.1);
+    }
+
+    /* --- Projects Section --- */
+    .projects {
+      padding: 100px 0;
+    }
+
+    .projects-grid {
+      display: grid;
+      gap: 100px;
+      margin-top: 50px;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      align-items: center;
+    }
+
+    .project-content {
+      grid-column: 7 / -1;
+      text-align: right;
+      z-index: 2;
+    }
+
+    .project-item.inverted .project-content {
+      grid-column: 1 / 7;
+      text-align: left;
+    }
+
+    .project-overline {
+      font-family: var(--font-code);
+      color: var(--primary);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .project-title {
+      font-size: 1.75rem;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .project-description {
+      background: var(--bg-light);
+      padding: 25px;
+      border-radius: 4px;
+      color: var(--text-muted);
+      font-size: 1rem;
+      box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+    }
+
+    .project-tech {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      justify-content: flex-end;
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .project-item.inverted .project-tech {
+      justify-content: flex-start;
+    }
+
+    .project-links {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      justify-content: flex-end;
+    }
+
+    .project-item.inverted .project-links {
+      justify-content: flex-start;
+    }
+
+    .project-links a {
+      color: var(--text-main);
+      font-size: 1.4rem;
+    }
+
+    .project-links a:hover {
+      color: var(--primary);
+    }
+
+    .project-image {
+      grid-column: 1 / 8;
+      grid-row: 1 / -1;
+      position: relative;
+      z-index: 1;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+      cursor: pointer;
+    }
+
+    .project-item.inverted .project-image {
+      grid-column: 6 / -1;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      filter: grayscale(100%) opacity(0.7);
+      transition: var(--transition);
+    }
+
+    .project-image:hover img {
+      filter: none;
+      opacity: 1;
+    }
+
+    /* --- Contact --- */
+    .contact {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 100px 0;
+    }
+
+    .contact h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .contact p {
+      color: var(--text-muted);
+      margin-bottom: 50px;
+      font-size: 1.1rem;
+    }
+
+    /* --- Footer --- */
+    footer {
+      padding: 20px;
+      text-align: center;
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer span {
+      color: var(--primary);
+    }
+
+    /* --- Print Styles --- */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+
+      header,
+      .hero,
+      .project-image,
+      .project-links,
+      footer,
+      .chatbots-grid {
+        display: none !important;
+      }
+
+      .about-content,
+      .projects-grid {
+        display: block !important;
+      }
+
+      .project-description,
+      .project-content {
+        background: white;
+        color: black;
+        box-shadow: none;
+        text-align: left !important;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding: 10px;
+      }
+
+      .section-title::after {
+        border-color: #ccc;
+      }
+
+      .btn {
+        border: 1px solid black;
+        color: black;
+      }
+
+      a {
+        text-decoration: underline;
+        color: black;
+      }
+
+      .about-img-wrapper {
+        display: none;
+      }
+
+      .project-item {
+        display: block;
+        margin-bottom: 40px;
+        page-break-inside: avoid;
+      }
+
+      .project-tech {
+        display: flex;
+        justify-content: flex-start;
+        color: black;
+      }
+    }
+
+    /* --- Responsividade --- */
+    @media (max-width: 768px) {
+      .section-title::after {
+        width: 100px;
+      }
+
+      .header-actions {
+        gap: 10px;
+      }
+
+      .btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
+
+      .about-content,
+      .project-item,
+      .project-content,
+      .project-image {
+        grid-column: 1 / -1;
+        grid-template-columns: 1fr;
+      }
+
+      .project-item {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 70px;
+      }
+
+      .project-item.inverted {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-image {
+        width: 100%;
+        height: auto;
+      }
+
+      .project-content,
+      .project-item.inverted .project-content {
+        text-align: left;
+      }
+
+      .project-tech,
+      .project-item.inverted .project-tech {
+        justify-content: flex-start;
+      }
+
+      .project-links,
+      .project-item.inverted .project-links {
+        justify-content: flex-start;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .chatbots-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-content">
+      <a href="#" class="logo">IM</a>
+      <div class="header-actions">
+        <a href="https://wa.me/5511978205672" class="btn">Contato</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <span class="hero-intro">Olá, meu nome é</span>
+      <h1>Ivan Martins.</h1>
+      <h2>Desenvolvedor Fullstack.</h2>
+      <p>
+        Especializado em construir soluções robustas e escaláveis. Combino a versatilidade do Python com a performance
+        do Golang e a interatividade do React para criar experiências web completas e inteligentes.
+      </p>
+      <a href="#projects" class="btn">Confira meus projetos</a>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+      <h2 class="section-title"><span>01.</span> Sobre Mim</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            Olá! Sou Ivan Martins, um desenvolvedor apaixonado por resolver problemas complexos através do código. Minha
+            jornada começou com curiosidade sobre como a web funciona e evoluiu para uma carreira focada em engenharia
+            de software de alta qualidade.
+          </p>
+          <p>
+            Atualmente, concentro meus esforços em desenvolver aplicações que não apenas funcionam bem, mas que também
+            são mantíveis e eficientes. Tenho facilidade em transitar entre diferentes camadas da stack, desde o design
+            de interfaces no frontend até a arquitetura de bancos de dados e containers no backend.
+          </p>
+          <p>Aqui estão algumas tecnologias com as quais tenho trabalhado recentemente:</p>
+
+          <ul class="tech-list">
+            <li>Python</li>
+            <li>Golang</li>
+            <li>JavaScript (ES6+)</li>
+            <li>React</li>
+            <li>HTML & CSS</li>
+            <li>Docker</li>
+            <li>PostgreSQL</li>
+            <li>Redis</li>
+            <li>WordPress</li>
+          </ul>
+        </div>
+        <div class="about-img">
+          <div class="about-img-wrapper">
+            <!-- Foto de Perfil Placeholder -->
+            <img src="./perfil.png" alt="Ivan Martins">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOVA SEÇÃO: Chatbots & IA -->
+    <section id="ai-services" class="ai-services">
+      <h2 class="section-title"><span>02.</span> Chatbots com IA</h2>
+
+      <p class="ai-intro">
+        Além do desenvolvimento web tradicional, possuo expertise avançada na criação de <strong>Assistentes Virtuais
+          Inteligentes</strong>.
+        Desenvolvo soluções autônomas que compreendem o contexto da conversa e se integram perfeitamente ao ecossistema
+        da sua empresa.
+      </p>
+
+      <div class="chatbots-grid">
+        <!-- Card 1 -->
+        <div class="chatbot-card">
+          <div class="chatbot-icon">
+            <i class="ph-fill ph-brain"></i>
+          </div>
+          <h3>Inteligência Real</h3>
+          <p>
+            Utilizo modelos de linguagem (LLMs) modernos para criar chatbots que não seguem apenas roteiros rígidos, mas
+            entendem a intenção do usuário, oferecendo respostas naturais e eficazes.
+          </p>
+          <ul>
+            <li>NLP & Processamento de Linguagem</li>
+            <li>Contexto de conversa</li>
+            <li>Aprendizado contínuo</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="chatbot-card">
+          <div class="chatbot-icon">
+            <i class="ph-fill ph-whatsapp-logo"></i>
+          </div>
+          <h3>Omnichannel</h3>
+          <p>
+            Leve o atendimento para onde seu cliente está. Implemento bots integrados nativamente às principais
+            plataformas de mensagens, garantindo resposta imediata 24/7.
+          </p>
+          <ul>
+            <li>WhatsApp Business API</li>
+            <li>Instagram Messaging</li>
+            <li>Telegram & Web Chat</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="chatbot-card">
+          <div class="chatbot-icon">
+            <i class="ph-fill ph-users-three"></i>
+          </div>
+          <h3>Integração CRM</h3>
+          <p>
+            O bot não apenas conversa, ele organiza. Faço a integração direta com seu CRM para cadastrar leads, agendar
+            reuniões e atualizar o status do cliente em tempo real durante o atendimento.
+          </p>
+          <ul>
+            <li>HubSpot / Salesforce</li>
+            <li>Pipedrive / ActiveCampaign</li>
+            <li>Webhooks Customizados</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Cloud -->
+    <section class="skills-section">
+      <h2 class="section-title" style="justify-content: center; margin-bottom: 20px;"><span>03.</span> Stack &
+        Tecnologias</h2>
+      <div class="skills-cloud">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Golang</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">Redis</span>
+        <span class="skill-tag">WordPress</span>
+        <span class="skill-tag">OpenAI API</span>
+        <span class="skill-tag">LangChain</span>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="projects">
+      <h2 class="section-title"><span>04.</span> Coisas que Construí</h2>
+
+      <div class="projects-grid">
+
+        <!-- Projeto 1: E-commerce -->
+        <div class="project-item">
+          <div class="project-image">
+            <a href="#">
+              <img src="./ecommerce/eccomerce.png" alt="E-commerce Project">
+            </a>
+          </div>
+          <div class="project-content">
+            <p class="project-overline">Plataforma de Vendas</p>
+            <h3 class="project-title">E-commerce</h3>
+            <div class="project-description">
+              Uma loja virtual desenvolvida com carrinho e design didático
+              feita exclusivamente para esse portfólio.
+            </div>
+            <ul class="project-tech">
+              <li>React</li>
+              <li>Python</li>
+              <li>PostgreSQL</li>
+              <li>Redis</li>
+            </ul>
+            <div class="project-links">
+              <a href="./ecommerce/index.html" aria-label="Link Externo"><i class="ph-bold ph-arrow-square-out"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 2: Infoproduto -->
+        <div class="project-item inverted">
+          <div class="project-image">
+            <a href="#">
+              <img src="./infoproduto/infoproduto.png" alt="Infoproduto Project">
+            </a>
+          </div>
+          <div class="project-content">
+            <p class="project-overline">Landing Page</p>
+            <h3 class="project-title">Vendas de Infoproduto</h3>
+            <div class="project-description">
+              Página de alta conversão para venda de cursos online. Focada em velocidade de carregamento e SEO
+              otimizado.
+            </div>
+            <ul class="project-tech">
+              <li>HTML/CSS</li>
+              <li>JavaScript</li>
+            </ul>
+            <div class="project-links">
+              <a href="./ecommerce/index.html" aria-label="Link Externo"><i class="ph-bold ph-arrow-square-out"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 3: Pizzaria -->
+        <div class="project-item">
+          <div class="project-image">
+            <a href="#">
+              <img src="./pizzaria/pizzaria.png" alt="Pizzaria Project">
+            </a>
+          </div>
+          <div class="project-content">
+            <p class="project-overline">Site Institucional</p>
+            <h3 class="project-title">Web App Pizzaria</h3>
+            <div class="project-description">
+              Site demonstrativo com foco na conversão de clientes.
+              Design responsivo focado na experiência do usuário mobile.
+            </div>
+            <ul class="project-tech">
+              <li>React</li>
+              <li>HTML/CSS</li>
+              <li>JavaScript</li>
+            </ul>
+            <div class="project-links">
+              <a href="./pizzaria/index.html" aria-label="Link Externo"><i class="ph-bold ph-arrow-square-out"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 4: Ferramenta Digital -->
+        <div class="project-item inverted">
+          <div class="project-image">
+            <a href="#">
+              <img src="./nexusFlow/nexus.png" alt="Digital Tool Project">
+            </a>
+          </div>
+          <div class="project-content">
+            <p class="project-overline">Landing Page</p>
+            <h3 class="project-title">Ferramenta de Automação</h3>
+            <div class="project-description">
+              Landing page de uma ferramenta de automação com foco na experiência do usuário.
+            </div>
+            <ul class="project-tech">
+              <li>Python</li>
+              <li>JavaScript</li>
+              <li>PostgreSQL</li>
+            </ul>
+            <div class="project-links">
+              <a href="./nexusFlow/index.html" aria-label="Link Externo"><i class="ph-bold ph-arrow-square-out"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <span class="hero-intro">05. O que vem a seguir?</span>
+      <h2>Entre em Contato</h2>
+      <p>
+        Estou sempre aberto a novas oportunidades e colaborações técnicas. Se você tem um projeto em mente, precisa de
+        um chatbot inteligente ou quer
+        discutir sobre tecnologia, sinta-se à vontade para me chamar.
+      </p>
+      <a href="https://wa.me/5511978205672" class="btn" style="padding: 18px 30px; font-size: 1rem;">Diga Olá</a>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div style="margin-bottom: 15px; font-size: 1.5rem;">
+        <a href="https://github.com/Ivan-Martins-DevProjects" style="margin: 0 10px;"><i
+            class="ph-fill ph-github-logo"></i></a>
+        <a href="https://www.linkedin.com/in/ivan-martins-240a203a7/" style="margin: 0 10px;"><i
+            class="ph-fill ph-linkedin-logo"></i></a>
+      </div>
+      <p>Desenhado e Construído por <span>Ivan Martins</span></p>
+    </div>
+  </footer>
+
+  <script>
+    // --- Efeito de Digitação ---
+    const textElement = document.querySelector('.hero h2');
+    // Adicionei referência a IA nos textos rotativos
+    const texts = ["Desenvolvedor Fullstack.", "Freelancer."];
+    let count = 0;
+    let index = 0;
+    let currentText = "";
+    let letter = "";
+    let isDeleting = false;
+
+    (function type() {
+      if (count === texts.length) {
+        count = 0;
+      }
+      currentText = texts[count];
+
+      if (isDeleting) {
+        letter = currentText.slice(0, --index);
+      } else {
+        letter = currentText.slice(0, ++index);
+      }
+
+      textElement.textContent = letter + (isDeleting ? "" : "|");
+
+      let typeSpeed = 100;
+      if (isDeleting) typeSpeed = 50;
+
+      if (!isDeleting && letter.length === currentText.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && letter.length === 0) {
+        isDeleting = false;
+        count++;
+        typeSpeed = 500;
+      }
+
+      setTimeout(type, typeSpeed);
+    })();
+
+    // --- Scroll Animations ---
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    });
+
+    document.querySelectorAll('.project-item, .chatbot-card').forEach((el) => {
+      el.style.opacity = 0;
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.6s ease-out';
+      observer.observe(el);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Landing Page Moderna - Acelere seu crescimento digital com nossa solução.">
+  <title>NexusFlow | Soluções Digitais</title>
+
+  <!-- Importando fontes modernas do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+           VARIÁVEIS CSS E RESET
+           ========================================= */
+    :root {
+      --primary-color: #4f46e5;
+      /* Índigo vibrante */
+      --primary-dark: #4338ca;
+      --secondary-color: #ec4899;
+      /* Rosa acento */
+      --text-main: #1f2937;
+      --text-light: #6b7280;
+      --bg-body: #f9fafb;
+      --bg-white: #ffffff;
+      --border-color: #e5e7eb;
+      --gradient-main: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
+
+      --max-width: 1200px;
+      --header-height: 80px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s ease;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* =========================================
+           COMPONENTES DE UI
+           ========================================= */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 24px 24px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 32px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+      box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.23);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      border: 2px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title p {
+      font-size: 1.125rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(79, 70, 229, 0.1);
+      color: var(--primary-color);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .highlight-text {
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* =========================================
+           HEADER & NAV
+           ========================================= */
+    header {
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo span {
+      color: var(--primary-color);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    /* =========================================
+           HERO SECTION
+           ========================================= */
+    .hero {
+      padding-top: calc(var(--header-height) + 80px);
+      padding-bottom: 80px;
+      display: flex;
+      align-items: center;
+      min-height: 90vh;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-text p {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      transform: perspective(1000px) rotateY(-5deg);
+      transition: transform 0.5s ease;
+    }
+
+    .hero-image:hover img {
+      transform: perspective(1000px) rotateY(0deg);
+    }
+
+    /* Elemento decorativo */
+    .blob {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: var(--gradient-main);
+      filter: blur(80px);
+      opacity: 0.2;
+      border-radius: 50%;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* =========================================
+           LOGOS / SOCIAL PROOF
+           ========================================= */
+    .logos-section {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-color);
+      background: white;
+    }
+
+    .logos-container p {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-light);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .logos-grid {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      opacity: 0.6;
+    }
+
+    .company-logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* =========================================
+           FEATURES SECTION
+           ========================================= */
+    .features {
+      padding: 100px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 40px 32px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(79, 70, 229, 0.1);
+    }
+
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      background: rgba(79, 70, 229, 0.1);
+      color: var(--primary-color);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .feature-card p {
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+
+    /* =========================================
+           PRICING SECTION
+           ========================================= */
+    .pricing {
+      padding: 100px 0;
+      background: white;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--bg-body);
+      padding: 48px 32px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card.popular {
+      background: #1e1b4b;
+      /* Dark indigo */
+      color: white;
+      transform: scale(1.05);
+      border: none;
+      box-shadow: var(--shadow-lg);
+      z-index: 2;
+    }
+
+    .pricing-card.popular p,
+    .pricing-card.popular .price-sub {
+      color: #a5b4fc;
+    }
+
+    .price {
+      font-size: 3rem;
+      font-weight: 800;
+      margin: 24px 0 8px 0;
+      display: flex;
+      align-items: baseline;
+    }
+
+    .currency {
+      font-size: 1.5rem;
+      margin-right: 4px;
+      font-weight: 600;
+    }
+
+    .price-sub {
+      font-size: 1rem;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .features-list {
+      margin: 32px 0 48px 0;
+      flex-grow: 1;
+    }
+
+    .features-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .check-icon {
+      color: var(--primary-color);
+      flex-shrink: 0;
+    }
+
+    .pricing-card.popular .check-icon {
+      color: #818cf8;
+    }
+
+    /* =========================================
+           CTA SECTION
+           ========================================= */
+    .cta-section {
+      padding: 100px 0;
+      background: var(--bg-body);
+      text-align: center;
+    }
+
+    .cta-box {
+      background: var(--gradient-main);
+      border-radius: var(--radius-lg);
+      padding: 80px 24px;
+      color: white;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .cta-box p {
+      font-size: 1.25rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .cta-box .btn {
+      background: white;
+      color: var(--primary-color);
+    }
+
+    .cta-box .btn:hover {
+      background: #f8fafc;
+      color: var(--primary-dark);
+    }
+
+    /* =========================================
+           FOOTER
+           ========================================= */
+    footer {
+      background: white;
+      padding: 80px 0 40px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-info p {
+      color: var(--text-light);
+      margin-top: 16px;
+      max-width: 300px;
+    }
+
+    .footer-col h4 {
+      font-weight: 700;
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    /* =========================================
+           RESPONSIVIDADE (MOBILE)
+           ========================================= */
+    @media (max-width: 968px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .pricing-card.popular {
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 0;
+        gap: 24px;
+        box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.1);
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <!-- Ícone de Hexágono SVG -->
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-color);">
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+            </path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          Nexus<span>Flow</span>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#features">Recursos</a></li>
+          <li><a href="#pricing">Preços</a></li>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#contact" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Entrar</a></li>
+        </ul>
+
+        <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <span class="tag">Novo: Integração 2.0</span>
+            <h1>Acelere seu crescimento com <span class="highlight-text">Inteligência Digital</span></h1>
+            <p>Uma plataforma tudo-em-um para gerenciar seu negócio, automatizar tarefas e escalar suas vendas sem
+              complicação.</p>
+            <div class="hero-buttons">
+              <a href="#" class="btn btn-primary">Começar Grátis</a>
+              <a href="#" class="btn btn-outline">Ver Demo</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <div class="blob"></div>
+            <!-- Imagem placeholder moderna -->
+            <img src="https://picsum.photos/seed/tech1/600/500" alt="Dashboard da Plataforma NexusFlow" width="600"
+              height="500">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="logos-section">
+      <div class="container">
+        <div class="logos-container">
+          <p>Empresas inovadoras que confiam em nós</p>
+          <div class="logos-grid">
+            <div class="company-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                style="margin-right: 5px;">
+                <circle cx="12" cy="12" r="10" />
+              </svg> ACME Corp</div>
+            <div class="company-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                style="margin-right: 5px;">
+                <rect x="2" y="2" width="20" height="20" />
+              </svg> Globex</div>
+            <div class="company-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                style="margin-right: 5px;">
+                <path d="M12 2L2 22h20L12 2z" />
+              </svg> Vertex</div>
+            <div class="company-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                style="margin-right: 5px;">
+                <path d="M12 2l3 6 6 1-4 4 1 6-6-3-6 3 1-6-4-4 6-1z" />
+              </svg> Starlight</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Por que escolher o NexusFlow?</h2>
+          <p>Ferramentas poderosas desenhadas para simplificar o fluxo de trabalho e aumentar a produtividade da sua
+            equipe.</p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <div class="feature-card">
+            <div class="icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </div>
+            <h3>Análise em Tempo Real</h3>
+            <p>Acompanhe métricas vitais com dashboards intuitivos que se atualizam instantaneamente.</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-card">
+            <div class="icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3>Segurança de Ponta</h3>
+            <p>Seus dados são criptografados de ponta a ponta, garantindo total conformidade e privacidade.</p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-card">
+            <div class="icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3>Colaboração de Equipe</h3>
+            <p>Comente, edite e compartilhe projetos com sua equipe em um ambiente unificado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+        <div class="section-title">
+          <h2>Planos Flexíveis</h2>
+          <p>Escolha o plano ideal para o estágio atual do seu negócio.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Basic -->
+          <div class="pricing-card">
+            <h3>Starter</h3>
+            <div class="price">
+              <span class="currency">R$</span>49<span class="price-sub">/mês</span>
+            </div>
+            <p>Para freelancers e iniciantes.</p>
+            <ul class="features-list">
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                5 Projetos
+              </li>
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Análises Básicas
+              </li>
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Suporte por Email
+              </li>
+            </ul>
+            <a href="#" class="btn btn-outline">Selecionar Plano</a>
+          </div>
+
+          <!-- Pro (Featured) -->
+          <div class="pricing-card popular">
+            <span class="tag" style="background: rgba(255,255,255,0.2); color: white; margin-bottom: 10px;">Mais
+              Popular</span>
+            <h3>Profissional</h3>
+            <div class="price">
+              <span class="currency">R$</span>99<span class="price-sub">/mês</span>
+            </div>
+            <p>Para empresas em crescimento.</p>
+            <ul class="features-list">
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Projetos Ilimitados
+              </li>
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                IA Avançada
+              </li>
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Suporte Prioritário 24/7
+              </li>
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Integração via API
+              </li>
+            </ul>
+            <a href="#" class="btn btn-primary" style="background: white; color: var(--primary-color);">Selecionar
+              Plano</a>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="pricing-card">
+            <h3>Enterprise</h3>
+            <div class="price">
+              <span class="currency">R$</span>299<span class="price-sub">/mês</span>
+            </div>
+            <p>Para grandes operações.</p>
+            <ul class="features-list">
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Tudo do Profissional
+              </li>
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Gestor Dedicado
+              </li>
+              <li>
+                <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                SSO & Segurança Avançada
+              </li>
+            </ul>
+            <a href="#" class="btn btn-outline">Falar com Vendas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Pronto para transformar seu negócio?</h2>
+          <p>Junte-se a mais de 10.000 empresas que usam o NexusFlow hoje.</p>
+          <a href="#" class="btn">Começar Teste Grátis de 14 Dias</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-color);">
+              <path
+                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+              </path>
+            </svg>
+            Nexus<span>Flow</span>
+          </div>
+          <p>Facilitando a gestão digital com ferramentas inteligentes e design intuitivo.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Produto</h4>
+          <ul>
+            <li><a href="#">Recursos</a></li>
+            <li><a href="#">Integrações</a></li>
+            <li><a href="#">Preços</a></li>
+            <li><a href="#">Atualizações</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#">Sobre Nós</a></li>
+            <li><a href="#">Carreiras</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacidade</a></li>
+            <li><a href="#">Termos</a></li>
+            <li><a href="#">Segurança</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 NexusFlow Inc. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script mínimo para o menu mobile -->
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Fecha o menu ao clicar em um link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+
+</html>
